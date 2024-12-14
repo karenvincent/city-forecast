@@ -59,13 +59,13 @@ function handleError(error) {
 function formatDay(timestamp) {
   let date = new Date(timestamp * 1000);
   let days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
-  return days[date.getDate()];
+  return days[date.getDay()];
 }
 
 function getForecast(city) {
   let apiKey = "00c5f44786367a1bt6a05fad239ccoe5";
   let apiUrl = `https://api.shecodes.io/weather/v1/forecast?query=${city}&key=${apiKey}&units=imperial`;
-  axios(apiUrl).then(displayForecast);
+  axios.get(apiUrl).then(displayForecast);
 }
 
 function displayForecast(response) {
