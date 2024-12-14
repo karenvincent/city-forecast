@@ -16,6 +16,8 @@ function refreshWeather(response) {
   descriptionElement.innerHTML = response.data.condition.description;
   humidityElement.innerHTML = `${response.data.temperature.humidity}%`;
   speedElement.innerHTML = `${response.data.wind.speed} mph`;
+
+  getForecast(response.data.city);
 }
 
 function formatDate(date) {
@@ -54,7 +56,13 @@ function handleError(error) {
   alert("Could not fetch weather data. Please try again.");
 }
 
-function displayForecast() {
+function getForecast(city) {
+  let apiKey = "00c5f44786367a1bt6a05fad239ccoe5";
+  let apiUrl = `https://api.shecodes.io/weather/v1/forecast?query=${city}&key=${apiKey}&units=imperial`;
+  axios(apiUrl).then(displayForecast);
+}
+
+function displayForecast(response) {
   let forecast = document.querySelector("#forecast");
   let days = ["Tue", "Wed", "Thu", "Fri", "Sat"];
   let forecastHtml = "";
